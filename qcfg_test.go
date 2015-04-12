@@ -1,11 +1,11 @@
 package qcfg
 
 import (
-	"os"
 	"io/ioutil"
-	"testing"
 	"math"
+	"os"
 	"sort"
+	"testing"
 )
 
 var cfgFile = "_sample.cfg"
@@ -33,10 +33,10 @@ func TestStr(t *testing.T) {
 
 // To test Int()
 func TestInt(t *testing.T) {
-    cfg := NewCfg("TestInt", cfgFile, false)
-    if cfg.Int("thirdblock", "some-row", "numProcs", -1) != 8 {
-        t.Fail()
-    }
+	cfg := NewCfg("TestInt", cfgFile, false)
+	if cfg.Int("thirdblock", "some-row", "numProcs", -1) != 8 {
+		t.Fail()
+	}
 	if cfg.Int("AXCFTWERdsr54", "GTERTR545", "end_time", -11) != -11 {
 		t.Fail()
 	}
@@ -44,10 +44,10 @@ func TestInt(t *testing.T) {
 
 // To test Int64()
 func TestInt64(t *testing.T) {
-    cfg := NewCfg("TestInt64", cfgFile, false)
-    if cfg.Int64("block4", "anotherrow", "millis", int64(0)) != int64(123456789) {
-        t.Fail()
-    }
+	cfg := NewCfg("TestInt64", cfgFile, false)
+	if cfg.Int64("block4", "anotherrow", "millis", int64(0)) != int64(123456789) {
+		t.Fail()
+	}
 	if cfg.Int64("AXCFTWERdsr54", "GTERTR545", "end_time", int64(-123456789)) != int64(-123456789) {
 		t.Fail()
 	}
@@ -55,11 +55,11 @@ func TestInt64(t *testing.T) {
 
 // To test Float64()
 func TestFloat64(t *testing.T) {
-    cfg := NewCfg("TestFloat64", cfgFile, false)
-    if math.Abs(cfg.Float64("anotherblock", "job", "ratio", 9999.99) - 0.3) > 0.000001 {
+	cfg := NewCfg("TestFloat64", cfgFile, false)
+	if math.Abs(cfg.Float64("anotherblock", "job", "ratio", 9999.99)-0.3) > 0.000001 {
 		t.Log(cfg.Float64("anotherblock", "job", "ratio", 9999.99))
-        t.Fail()
-    }
+		t.Fail()
+	}
 	if cfg.Float64("AXCFTWERdsr54", "GTERTR545", "end_time", 0.0) != 0.0 {
 		t.Fail()
 	}
@@ -92,7 +92,7 @@ func TestGetRows(t *testing.T) {
 // to test GetCols()
 func TestGetCols(t *testing.T) {
 	cfg := NewCfg("TestGetCols", cfgFile, false)
-	actualcols := []string{"active", "prereqlist", "actionlist", "days", "start_time", "end_time", "watch_path", 
+	actualcols := []string{"active", "prereqlist", "actionlist", "days", "start_time", "end_time", "watch_path",
 		"region", "datelist", "period", "freq", "ratio", "TZ"}
 	cols := cfg.GetCols("anotherblock", "job")
 	if !isSetEqual(actualcols, cols) {
@@ -140,7 +140,7 @@ func TestEditEntry(t *testing.T) {
 
 // To test CfgWrite()
 func TestCfgWrite(t *testing.T) {
-    cfg := NewCfg("TestCfgWrite_1", cfgFile, false)
+	cfg := NewCfg("TestCfgWrite_1", cfgFile, false)
 	tempfp, err := ioutil.TempFile("", "TestCfgWrite")
 	if err != nil {
 		t.Error("Error creating temp file for testing CfgWrite(), err =", err)
@@ -161,13 +161,16 @@ func TestCfgWrite(t *testing.T) {
 	}
 }
 
-
 func isSetEqual(a, b []string) bool {
-	if len(a) != len(b) { return false }
+	if len(a) != len(b) {
+		return false
+	}
 	sort.Strings(a)
 	sort.Strings(b)
 	for ii := 0; ii < len(a); ii++ {
-		if a[ii] != b[ii] { return false }
+		if a[ii] != b[ii] {
+			return false
+		}
 	}
 	return true
 }
