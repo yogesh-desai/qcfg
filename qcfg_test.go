@@ -160,7 +160,7 @@ func TestCfgWrite(t *testing.T) {
 		t.Log("Warning : Could not remove temp file", tempfile, "err =", err)
 	}
 }
-
+// isSetEqual Function sorts the strings & checks both are equal are not.
 func isSetEqual(a, b []string) bool {
 	if len(a) != len(b) {
 		return false
